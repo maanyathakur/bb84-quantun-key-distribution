@@ -4,7 +4,6 @@ from qiskit import QuantumCircuit, transpile
 from qiskit_aer import Aer
 import binascii
 
-# Predefined functions (same as your original code)
 def encode_qubits(bits, bases):
     assert len(bits) == len(bases)
     encoded_qubits = []
@@ -81,7 +80,7 @@ st.title("BB84 Quantum Key Distribution Simulation")
 num_bits = st.slider("Number of Bits to Generate", min_value=10, max_value=500, value=100, step=10)
 
 if st.button("Run BB84 Protocol"):
-    # Phase 1: Alice's actions
+    # Alice's actions
     alice_bits = generate_bits(num_bits)
     alice_bases = generate_bases(num_bits)
     encoded_qubits = encode_qubits(alice_bits, alice_bases)
@@ -90,14 +89,14 @@ if st.button("Run BB84 Protocol"):
     st.write(f"Generated Bits (Alice): {alice_bits}")
     st.write(f"Generated Bases (Alice): {alice_bases}")
 
-    # Phase 2: Eve's interception
+    # Eve's interception
     eve_bases = generate_bases(num_bits)
     eve_bits = measure_qubits(encoded_qubits[:], eve_bases)  # Measure a copy
     st.subheader("Eve's Eavesdropping")
     st.write(f"Eve's Measurement Bases: {eve_bases}")
     st.write(f"Eve's Measured Bits: {eve_bits}")
 
-    # Phase 3: Bob's measurement
+    # Bob's measurement
     bob_bases = generate_bases(num_bits)
     bob_bits = measure_qubits(encoded_qubits, bob_bases)
 
@@ -105,7 +104,7 @@ if st.button("Run BB84 Protocol"):
     st.write(f"Bob's Measurement Bases: {bob_bases}")
     st.write(f"Bob's Measured Bits: {bob_bits}")
 
-    # Phase 4: Key Comparison
+    # Key Comparison
     same_base_indexes = [i for i, (ab, bb) in enumerate(zip(alice_bases, bob_bases)) if ab == bb]
     alice_key = eliminate_differences(alice_bits, same_base_indexes)
     bob_key = eliminate_differences(bob_bits, same_base_indexes)
