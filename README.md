@@ -16,7 +16,7 @@ The BB84 protocol allows two parties (Alice and Bob) to generate a shared secret
 
 ## Installation
 
-1. Clone the repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/maanyathakur/bb84-quantum-key-distribution.git
